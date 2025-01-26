@@ -1,0 +1,3 @@
+.nav__item li a {
+  @apply inline-block text-lg font-maax_medium uppercase tracking-widest duration-200 transition-all hover:opacity-50;
+}
