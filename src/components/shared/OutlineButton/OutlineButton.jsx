@@ -12,7 +12,7 @@ const OutlineButton = ({
   return (
     <button
       type={type}
-      className={`${className} py-5 px-[50px] text-black uppercase text-xl relative font-maax_medium flex items-center gap-3`}
+      className={`${className} px-5 py-4 lg:px-7 xl:py-5 xl:px-[50px] text-black uppercase text-base xl:text-xl relative font-maax_medium flex items-center gap-3`}
       disabled={disabled}
       onClick={onClick}
     >
@@ -21,8 +21,8 @@ const OutlineButton = ({
         className="absolute top-0 left-0 w-full h-full"
         alt=""
       />
-      <span>{text}</span>
-      {Icon && <Icon className="text-2xl" />}
+      <span className="hidden lg:inline-block">{text}</span>
+      {Icon && <Icon className="text-xl xltext-2xl" />}
     </button>
   );
 };

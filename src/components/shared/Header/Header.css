@@ -1,3 +1,19 @@
 .nav__item li a {
-  @apply inline-block text-lg font-maax_medium uppercase tracking-widest duration-200 transition-all hover:opacity-50;
+  @apply inline-block text-base xl:text-lg font-maax_medium uppercase tracking-widest duration-200 transition-all hover:opacity-50;
+}
+
+.mobile__nav_menu li {
+  @apply flex justify-between items-center transition-all duration-200 hover:opacity-50;
+}
+
+.mobile__nav_menu li span {
+  @apply font-louize text-4xl text-black inline-block;
+}
+
+.mobile__nav_menu li a {
+  @apply font-louize text-4xl block text-black leading-tight;
+}
+
+.social__menu li a {
+  @apply transition-all hover:opacity-50 inline-block size-5;
 }
