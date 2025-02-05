@@ -12,7 +12,7 @@ const OutlineButton = ({
   return (
     <button
       type={type}
-      className={`${className} px-5 py-4 lg:px-7 xl:py-5 xl:px-[50px] text-black uppercase text-base xl:text-xl relative font-maax_medium flex items-center gap-3`}
+      className={`${className} px-5 py-4 lg:px-7 xl:py-5 xl:px-[50px] uppercase text-base xl:text-xl relative font-maax_medium flex items-center gap-3`}
       disabled={disabled}
       onClick={onClick}
     >

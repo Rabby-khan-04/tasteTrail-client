@@ -13,7 +13,10 @@ export default {
         maax_medium: ["Maax Medium", "sans-serif"],
       },
       colors: {
+        primary: "#195908",
         almond: "#e9dbcd",
+        granny_smith_apple: "#b2d99a",
+        kombu_green: "#2f4230",
       },
     },
   },

@@ -16,23 +16,33 @@ const Header = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink onClick={() => setToggle(false)} to="/">
+          Home
+        </NavLink>
         {toggle && <span>.I</span>}
       </li>
       <li>
-        <NavLink to="/shop">Shop</NavLink>
+        <NavLink onClick={() => setToggle(false)} to="/shop">
+          Shop
+        </NavLink>
         {toggle && <span>.II</span>}
       </li>
       <li>
-        <NavLink to="/journal">Journal</NavLink>
+        <NavLink onClick={() => setToggle(false)} to="/journal">
+          Journal
+        </NavLink>
         {toggle && <span>.III</span>}
       </li>
       <li>
-        <NavLink to="/">History</NavLink>
+        <NavLink onClick={() => setToggle(false)} to="/">
+          History
+        </NavLink>
         {toggle && <span>.VI</span>}
       </li>
       <li>
-        <NavLink to="/">Contact us</NavLink>
+        <NavLink onClick={() => setToggle(false)} to="/contact">
+          Contact us
+        </NavLink>
         {toggle && <span>.V</span>}
       </li>
     </>
@@ -97,7 +107,7 @@ const Header = () => {
             <ul className="mobile__nav_menu space-y-5">{navLinks}</ul>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 mb-4">
             <h4 className="font-louize_medium text-base text-black">Contact</h4>
             <a
               href="mailto:ajrabbyk72@gmail.com"
@@ -125,13 +135,13 @@ const Header = () => {
           </div>
         </div>
         <div className="">
-          <div className="border-y border-black p-4 grid grid-cols-2 gap-4 font-maax_medium text-base text-black uppercase">
+          <div className="border-y border-black px-4 py-3 grid grid-cols-2 gap-2 font-maax_medium text-base text-black uppercase">
             <Link to="/">Terms & conditions</Link>
             <Link to="/">Nutrition</Link>
             <Link to="/">Privacy & cookies notice!!</Link>
             <Link to="/">Personal Data & Cookies</Link>
           </div>
-          <div className="p-4 text-center">
+          <div className="px-4 py-3 text-center">
             <Link
               to="/"
               className="inline-block text-base font-maax_medium text-black transition-opacity duration-200 hover:opacity-50"

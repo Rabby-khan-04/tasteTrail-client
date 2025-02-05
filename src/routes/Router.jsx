@@ -2,9 +2,10 @@ import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import Main from "@/layouts/Main";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
-import Blog from "@/pages/Blog/Blog";
 import Checkout from "@/pages/Checkout/Checkout";
+import Contact from "@/pages/Contact/Contact";
 import Home from "@/pages/Home/Home";
+import Journal from "@/pages/Journal/Journal";
 import MyAccount from "@/pages/MyAccount/MyAccount";
 import Orders from "@/pages/Orders/Orders";
 import Product from "@/pages/Product/Product";
@@ -23,11 +24,15 @@ const router = createBrowserRouter([
       },
       {
         path: "journal",
-        element: <Blog />,
+        element: <Journal />,
       },
       {
         path: "shop",
         element: <Shop />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "login",
