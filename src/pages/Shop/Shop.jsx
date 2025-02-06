@@ -12,15 +12,13 @@ const Shop = () => {
     queryKey: ["productInfo"],
   });
 
-  console.log(productInfo);
-
   if (productInfoLoading) return <Spinner />;
 
   return (
     <main className="bg-almond">
       <ShopTitle />
       <ShopBanner />
-      <ShopProducts />
+      <ShopProducts productInfo={productInfo?.data?.data} />
     </main>
   );
 };

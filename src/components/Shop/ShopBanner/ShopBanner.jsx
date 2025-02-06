@@ -18,7 +18,7 @@ const ShopBanner = () => {
             dish. Shop now and treat yourself to something special!
           </p>
         </div>
-        <div className="col-span-3 p-11">
+        <div className="col-span-3 p-8">
           <video
             src={cookingVid}
             autoPlay={true}
