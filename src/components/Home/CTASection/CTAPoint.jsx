@@ -9,7 +9,7 @@ const CTAPoint = ({ text, color, setBgColor }) => {
       onMouseLeave={() => setBgColor("#FFFFFF")}
     >
       <div className="grow text-center">
-        <h4 className="font-louize text-7xl not-italic transition-all duration-300 hover:-skew-x-12">
+        <h4 className="font-louize text-7xl not-italic transition-all duration-300 group-hover:-skew-x-12">
           {text}
         </h4>
       </div>
