@@ -1,6 +1,7 @@
 import AboutSection from "@/components/Home/AboutSection/AboutSection";
 import Banner from "@/components/Home/Banner/Banner";
 import CTASection from "@/components/Home/CTASection/CTASection";
+import PickySection from "@/components/Home/PickySection/PickySection";
 import ProductSection from "@/components/Home/ProductSection/ProductSection";
 // import paperBgImg from "@/assets/image/background/bg-paper.jpg";
 
@@ -15,6 +16,7 @@ const Home = () => {
       <AboutSection />
       <CTASection />
       <ProductSection />
+      <PickySection />
     </main>
   );
 };

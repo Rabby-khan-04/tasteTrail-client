@@ -1,5 +1,7 @@
 import OutlineButton from "@/components/shared/OutlineButton/OutlineButton";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
+import SectionTitle from "@/components/shared/SectionTitle";
+import SkeletonCard from "@/components/shared/SkeletonCard/SkeletonCard";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { IoFastFoodOutline } from "react-icons/io5";
@@ -24,20 +26,16 @@ const ProductSection = () => {
   return (
     <section className="py-32">
       <div className="container">
-        <div className="text-center">
-          <h2 className="text-5xl text-primary font-louize">
-            Meet Our Delicious Menu
-          </h2>
-          <p className="text-lg text-black mt-3 font-maax">
-            Fresh ingredients, mouthwatering flavors, and handcrafted
-            perfection.
-          </p>
-        </div>
-
-        <div className="mx-auto max-w-7xl grid grid-cols-3 gap-6 mt-14">
-          {products?.data?.data?.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+        <SectionTitle
+          title="Meet Our Delicious Menu"
+          description="Fresh ingredients, mouthwatering flavors, and handcrafted perfection."
+        />
+        <div className="mx-auto max-w-7xl grid grid-cols-3 gap-6">
+          {isLoading
+            ? Array(3).map((item, idx) => <SkeletonCard key={idx} />)
+            : products?.data?.data?.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
         </div>
         <div className="flex justify-center mt-12">
           <OutlineButton

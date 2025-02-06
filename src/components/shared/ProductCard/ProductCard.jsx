@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      className="space-y-4 relative cursor-pointer"
+      className="space-y-4 relative cursor-pointer group"
       onClick={() => navigate(`/product/${_id}`)}
     >
       <img
@@ -18,7 +18,9 @@ const ProductCard = ({ product }) => {
       />
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="font-louize_medium text-xl text-primary">{name}</h2>
+          <h2 className="font-louize_medium text-xl text-primary transition-all duration-300 group-hover:underline">
+            {name}
+          </h2>
           <p className="font-louize_medium text-2xl text-primary">${price}</p>
         </div>
         <p className="font-maax text-sm text-black">{description}</p>
