@@ -1,4 +1,4 @@
-import SectionTitle from "@/components/shared/SectionTitle";
+import SectionTitle from "@/components/shared/SectionTitle/SectionTitle";
 import kitchenImg from "@/assets/image/home/kitchen-image.jpg";
 import PickyAccordion from "./PickyAccordion";
 const PickySection = () => {

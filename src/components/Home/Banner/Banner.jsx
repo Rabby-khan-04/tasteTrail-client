@@ -12,24 +12,24 @@ const Banner = () => {
 
   const imagTranslate = useTransform(
     scrollYProgress,
-    [0.01, 0.05],
+    [0.01, 0.03],
     ["280px", "0px"]
   );
-  const imagScale = useTransform(scrollYProgress, [0.01, 0.05], [0.7, 1]);
+  const imagScale = useTransform(scrollYProgress, [0.01, 0.03], [0.7, 1]);
   const imageBorderRadious = useTransform(
     scrollYProgress,
-    [0.01, 0.05],
+    [0.01, 0.03],
     ["300px", "0px"]
   );
 
   const textTranslate = useTransform(
     scrollYProgress,
-    [0.01, 0.03],
+    [0.01, 0.02],
     ["60px", "300px"]
   );
   const textColor = useTransform(
     scrollYProgress,
-    [0.01, 0.06],
+    [0.01, 0.04],
     ["#195908", "#ffffff"]
   );
 

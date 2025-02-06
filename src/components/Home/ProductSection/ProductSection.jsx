@@ -1,6 +1,6 @@
 import OutlineButton from "@/components/shared/OutlineButton/OutlineButton";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
-import SectionTitle from "@/components/shared/SectionTitle";
+import SectionTitle from "@/components/shared/SectionTitle/SectionTitle";
 import SkeletonCard from "@/components/shared/SkeletonCard/SkeletonCard";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
