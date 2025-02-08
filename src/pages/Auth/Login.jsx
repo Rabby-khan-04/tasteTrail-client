@@ -13,10 +13,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { user } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
 
   const onSubmit = (data) => {
-    console.log(data);
+    const email = data.email;
+    const password = data.password;
+    loginUser(email, password)
+      .then((loggendInUser) => {
+        console.log(loggendInUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <main className="bg-almond h-screen flex items-center">
@@ -44,17 +52,6 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="text-left space-y-3"
           >
-            <div className="space-y-2">
-              <Input
-                type="name"
-                placeholder="Name"
-                {...register("name", { required: true })}
-                className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none"
-              />
-              <p className="text-sm text-red-500 font-maax">
-                {errors.name && <span>This field is required</span>}
-              </p>
-            </div>
             <div className="space-y-2">
               <Input
                 type="email"

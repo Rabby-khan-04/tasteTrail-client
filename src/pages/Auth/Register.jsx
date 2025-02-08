@@ -1,10 +1,26 @@
 import authImg from "@/assets/image/auth/auth-image.jpg";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "@/components/Auth/SocialLogin";
+import { useContext } from "react";
+import AuthContext from "@/context/AuthContext";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Register = () => {
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { mutateAsync: createUserIntoDatabase } = useMutation({
+    mutationFn: (userInfo) => axiosSecure.post("/users/user", userInfo),
+    onSuccess: () => {
+      toast.success("User registered successfully!!");
+      navigate("/");
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -12,7 +28,24 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const displayName = data.name;
+    const email = data.email;
+    const password = data.password;
+
+    registerUser(email, password)
+      .then(async (createdUser) => {
+        if (createdUser) {
+          await updateUserProfile({ displayName });
+          const userInfo = {
+            email: createdUser.user.email,
+            name: createdUser.user.displayName,
+          };
+          createUserIntoDatabase(userInfo);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <main className="bg-almond h-screen flex items-center">
@@ -42,7 +75,7 @@ const Register = () => {
           >
             <div className="space-y-2">
               <Input
-                type="name"
+                type="text"
                 placeholder="Name"
                 {...register("name", { required: true })}
                 className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none"
