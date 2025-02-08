@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import SocialLogin from "@/components/Auth/SocialLogin";
+import { useContext } from "react";
+import AuthContext from "@/context/AuthContext";
 
 const Login = () => {
   const {
@@ -10,6 +12,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { user } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     console.log(data);
