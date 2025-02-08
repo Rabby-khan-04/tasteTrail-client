@@ -35,14 +35,6 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
         path: "my-account",
         element: <MyAccount />,
       },
@@ -59,6 +51,14 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 export default router;

@@ -23,7 +23,10 @@ const Checkout = () => {
       const response = await axiosSecure.post("/orders/place-order", orderInfo);
       console.log(response);
     },
-    onSuccess: () => toast.success("Order placed successfully!!"),
+    onSuccess: () => {
+      toast.success("Order placed successfully!!");
+      navigate("/");
+    },
     onError: () => {
       toast.error("Failed to place the order!!");
     },
