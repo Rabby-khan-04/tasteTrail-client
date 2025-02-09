@@ -5,13 +5,35 @@ import { LuLogIn } from "react-icons/lu";
 import hamburgerIcon from "@/assets/icons/hamburger.svg";
 import crossIcon from "@/assets/icons/cross.svg";
 import bgPaper from "@/assets/image/background/bg-paper.jpg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram, FaSpotify } from "react-icons/fa";
+import AuthContext from "@/context/AuthContext";
+import toast from "react-hot-toast";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const navigate = useNavigate();
   const [headerHeight, setHeaderHeight] = useState(0);
   const [toggle, setToggle] = useState(false);
+  const { user, logoutUser } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
+  const handleLogout = () => {
+    logoutUser()
+      .then(() => {
+        axiosSecure
+          .post("/users/logout")
+          .then(() => {
+            toast.success("User logged out successfully!!");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const navLinks = (
     <>
@@ -86,7 +108,11 @@ const Header = () => {
           </ul>
 
           <div className="lg:px-5 lg:py-4 xl:px-[2.14rem] xl:py-[1.4rem] w-[60px] lg:w-auto">
-            {toggle || (
+            {toggle || user ? (
+              <>
+                <OutlineButton text="Logout" onClick={handleLogout} />
+              </>
+            ) : (
               <OutlineButton
                 text="Login"
                 Icon={LuLogIn}

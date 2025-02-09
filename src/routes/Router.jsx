@@ -11,6 +11,7 @@ import Orders from "@/pages/Orders/Orders";
 import Product from "@/pages/Product/Product";
 import Shop from "@/pages/Shop/Shop";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
       },
       {
         path: "checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: "orders",

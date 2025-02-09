@@ -1,9 +1,9 @@
 import Spinner from "@/components/shared/Spinner/Spinner";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Product = () => {
   const { id } = useParams();

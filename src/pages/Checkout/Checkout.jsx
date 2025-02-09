@@ -8,14 +8,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useMutation } from "@tanstack/react-query";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Checkout = () => {
-  const { state } = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-  const { productId, price, quantity, image, category, origin, name } = state;
+  const { productId, price, quantity, image, category, origin, name } =
+    location.state;
+
+  console.log("from checkout", location);
 
   const { mutateAsync: handleCheckOut } = useMutation({
     mutationFn: async () => {

@@ -3,10 +3,10 @@ import FilterItem from "./FilterItem";
 import { useState } from "react";
 import ProductPagination from "./ProductPagination";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
 import ProductCard from "@/components/shared/ProductCard/ProductCard";
 import SkeletonCard from "@/components/shared/SkeletonCard/SkeletonCard";
 import { FaTimes } from "react-icons/fa";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const ShopProducts = ({ productInfo }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);

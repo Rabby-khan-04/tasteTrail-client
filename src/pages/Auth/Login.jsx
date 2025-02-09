@@ -1,7 +1,7 @@
 import authImg from "@/assets/image/auth/auth-image.jpg";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "@/components/Auth/SocialLogin";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthContext";
@@ -12,6 +12,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { loginUser } = useContext(AuthContext);
 
@@ -19,8 +21,15 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     loginUser(email, password)
-      .then((loggendInUser) => {
-        console.log(loggendInUser);
+      .then(() => {
+        let orderInfo = {};
+
+        if (location?.state?.orderInfo) {
+          orderInfo = location?.state?.orderInfo;
+        }
+        navigate(location?.state?.path || "/", {
+          state: { ...orderInfo },
+        });
       })
       .catch((err) => {
         console.log(err);
