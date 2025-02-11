@@ -1,26 +1,41 @@
+import Spinner from "@/components/shared/Spinner/Spinner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import AuthContext from "@/context/AuthContext";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
-import { useContext } from "react";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
-const AddProduct = () => {
-  const { user } = useContext(AuthContext);
+const UpdateProduct = () => {
   const axiosSecure = useAxiosSecure();
-  const { mutateAsync: addProductToDb } = useMutation({
-    mutationFn: (productInfo) =>
-      axiosSecure.post("/products/product", productInfo),
-    onSuccess: () => toast.success("Product Added Successfully"),
+  const { id } = useParams();
+  const { register, handleSubmit } = useForm();
+  const queryClient = useQueryClient();
+
+  const { data: productData, isLoading: productDataLoading } = useQuery({
+    queryFn: () => axiosSecure.get(`/products/product/${id}`),
+    queryKey: ["product", { id }],
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { mutateAsync: updateProduct } = useMutation({
+    mutationFn: (productInfo) =>
+      axiosSecure.patch(
+        `/products/product/${productData?.data?.data?._id}`,
+        productInfo
+      ),
+    onSuccess: (res) => {
+      if (res.data.data.modifiedCount > 0) {
+        queryClient.invalidateQueries(["product"]);
+        toast.success("Product Added Successfully");
+      }
+    },
+  });
 
   const onSubmit = (data) => {
     const productInfo = {
@@ -28,170 +43,126 @@ const AddProduct = () => {
       image: data.image,
       category: data.category,
       origin: data.origin,
-      price: parseInt(data.price),
+      price: parseFloat(data.price),
       quantity: parseInt(data.quantity),
       description: data.description,
       addBy: { email: data.email, name: data.userName },
     };
-    addProductToDb(productInfo);
+    updateProduct(productInfo);
   };
+
+  if (productDataLoading) return <Spinner />;
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-left space-y-3">
         <div className="flex items-center gap-3">
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="text"
               placeholder="Name"
-              {...register("name", { required: true })}
+              defaultValue={productData?.data?.data?.name}
+              {...register("name")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.name && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="url"
               placeholder="Image URL"
-              {...register("image", { required: true })}
+              defaultValue={productData?.data?.data?.image}
+              {...register("image")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.image && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="text"
               placeholder="Category"
-              {...register("category", { required: true })}
+              defaultValue={productData?.data?.data?.category}
+              {...register("category")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.category && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="number"
               placeholder="Quantity"
-              {...register("quantity", { required: true })}
+              defaultValue={productData?.data?.data?.quantity}
+              {...register("quantity")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.quantity && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
-              type="number"
+              type="text"
               placeholder="Price"
-              {...register("price", { required: true })}
+              defaultValue={productData?.data?.data?.price}
+              {...register("price")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.price && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="text"
               placeholder="Seler Name"
-              defaultValue={user.displayName}
+              defaultValue={productData?.data?.data?.addBy?.name}
               readOnly
-              {...register("userName", { required: true })}
+              {...register("userName")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.addedBy && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="text"
               placeholder="Seler Email"
-              defaultValue={user.email}
+              defaultValue={productData?.data?.data?.addBy?.email}
               readOnly
-              {...register("email", { required: true })}
+              {...register("email")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.addedBy && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
 
-          <div className="space-y-2 w-full">
+          <div className="w-full">
             <Input
               type="text"
               placeholder="Origin"
-              {...register("origin", { required: true })}
+              defaultValue={productData?.data?.data?.origin}
+              {...register("origin")}
               className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full"
             />
-
-            {errors.origin && (
-              <p className="text-sm text-red-500 font-maax">
-                This field is required
-              </p>
-            )}
           </div>
         </div>
 
-        <div className="space-y-2 w-full">
+        <div className="w-full">
           <Textarea
             placeholder="Description"
-            {...register("description", { required: true })}
+            defaultValue={productData?.data?.data?.description}
+            {...register("description")}
             className="block border-primary text-lg text-primary placeholder:text-lg placeholder:text-primary font-maax py-3 px-5 appearance-none w-full h-28"
           />
-
-          {errors.description && (
-            <p className="text-sm text-red-500 font-maax">
-              This field is required
-            </p>
-          )}
         </div>
 
         <button
           className="text-xl bg-primary inline-block w-full p-4 text-white rounded-md transition-all duration-200 hover:opacity-75"
           type="submit"
         >
-          Add Product
+          Update Product
         </button>
       </form>
     </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

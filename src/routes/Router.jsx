@@ -15,6 +15,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "@/layouts/Dashboard";
 import AddProduct from "@/pages/AddProduct/AddProduct";
 import MyProduct from "@/pages/MyProduct/MyProduct";
+import UpdateProduct from "@/pages/UpdateProduct/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +99,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-product/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />
           </PrivateRoute>
         ),
       },

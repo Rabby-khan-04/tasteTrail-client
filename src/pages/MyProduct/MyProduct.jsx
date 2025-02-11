@@ -23,8 +23,6 @@ const MyProduct = () => {
 
   if (myProductLoading) return <Spinner />;
 
-  console.log(myProducts);
-
   return (
     <div>
       {myProducts?.data?.data?.length === 0 ? (
@@ -41,7 +39,7 @@ const MyProduct = () => {
       ) : (
         <div className="grid grid-cols-3 gap-6">
           {myProducts?.data?.data?.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard key={product._id} product={product} action />
           ))}
         </div>
       )}
