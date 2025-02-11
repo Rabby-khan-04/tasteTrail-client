@@ -1,14 +1,16 @@
 import Spinner from "@/components/shared/Spinner/Spinner";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import AuthContext from "@/context/AuthContext";
 
 const Product = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const { data: product, isLoading: productLoading } = useQuery({
@@ -128,7 +130,8 @@ const Product = () => {
 
               <button
                 onClick={handdleAddToCart}
-                className="text-xl bg-primary inline-block w-full p-4 text-white rounded-full transition-all duration-200 hover:opacity-75"
+                className="text-xl bg-primary inline-block w-full p-4 text-white rounded-full transition-all duration-200 hover:opacity-75 disabled:opacity-30"
+                disabled={addBy.email === user.email}
               >
                 Procced To Checkout
               </button>

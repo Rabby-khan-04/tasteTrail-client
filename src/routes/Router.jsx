@@ -12,6 +12,9 @@ import Product from "@/pages/Product/Product";
 import Shop from "@/pages/Shop/Shop";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "@/layouts/Dashboard";
+import AddProduct from "@/pages/AddProduct/AddProduct";
+import MyProduct from "@/pages/MyProduct/MyProduct";
 
 const router = createBrowserRouter([
   {
@@ -35,10 +38,7 @@ const router = createBrowserRouter([
         path: "contact",
         element: <Contact />,
       },
-      {
-        path: "my-account",
-        element: <MyAccount />,
-      },
+
       {
         path: "product/:id",
         element: <Product />,
@@ -51,10 +51,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "orders",
-        element: <Orders />,
-      },
     ],
   },
   {
@@ -64,6 +60,48 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "my-account",
+        element: (
+          <PrivateRoute>
+            <MyAccount />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <PrivateRoute>
+            <Orders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-product",
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-product",
+        element: (
+          <PrivateRoute>
+            <MyProduct />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 export default router;

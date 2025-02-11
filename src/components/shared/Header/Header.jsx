@@ -5,6 +5,7 @@ import { LuLogIn } from "react-icons/lu";
 import hamburgerIcon from "@/assets/icons/hamburger.svg";
 import crossIcon from "@/assets/icons/cross.svg";
 import bgPaper from "@/assets/image/background/bg-paper.jpg";
+import userIco from "@/assets/icons/user.png";
 import { useContext, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram, FaSpotify } from "react-icons/fa";
 import AuthContext from "@/context/AuthContext";
@@ -109,9 +110,18 @@ const Header = () => {
 
           <div className="lg:px-5 lg:py-4 xl:px-[2.14rem] xl:py-[1.4rem] w-[60px] lg:w-auto">
             {toggle || user ? (
-              <>
+              <div className="flex items-center gap-3 cursor-pointer">
                 <OutlineButton text="Logout" onClick={handleLogout} />
-              </>
+                <div>
+                  <Link to="/dashboard/my-account">
+                    <img
+                      src={user.photoURL || userIco}
+                      className="inline-block size-12 rounded-full"
+                      alt=""
+                    />
+                  </Link>
+                </div>
+              </div>
             ) : (
               <OutlineButton
                 text="Login"
