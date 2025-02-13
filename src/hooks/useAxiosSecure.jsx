@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { useEffect } from "react";
 
 const axiosConfig = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://taste-trail-serve.vercel.app/api/v1",
   withCredentials: true,
 });
 
