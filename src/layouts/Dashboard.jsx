@@ -75,6 +75,20 @@ const Dashboard = () => {
                       Orders
                     </NavLink>
                   </li>
+                  {userInfo?.data?.data?.role === "admin" && (
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          `block p-3 rounded-md ${
+                            isActive ? "bg-[#87B27B] font-bold" : ""
+                          }`
+                        }
+                        to="/dashboard/all-orders"
+                      >
+                        All Orders
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

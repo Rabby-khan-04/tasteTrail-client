@@ -16,6 +16,8 @@ import Dashboard from "@/layouts/Dashboard";
 import AddProduct from "@/pages/AddProduct/AddProduct";
 import MyProduct from "@/pages/MyProduct/MyProduct";
 import UpdateProduct from "@/pages/UpdateProduct/UpdateProduct";
+import AdminRoutes from "./AdminRoutes";
+import AllOrders from "@/pages/AllOrders/AllOrders";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +110,14 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <UpdateProduct />
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "all-orders",
+        element: (
+          <AdminRoutes>
+            <AllOrders />
+          </AdminRoutes>
         ),
       },
     ],
